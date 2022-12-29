@@ -16,6 +16,7 @@ public class Cliente {
     private String cpf;
     @OneToMany(mappedBy = "cliente")
     private Set<Pedido> pedidos;
+    private Boolean ativo = true;
 
     public Cliente() {
     }
@@ -55,6 +56,14 @@ public class Cliente {
 
     public void setPedidos(Set<Pedido> pedidos) {
         this.pedidos = pedidos;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
     }
 
     @Override

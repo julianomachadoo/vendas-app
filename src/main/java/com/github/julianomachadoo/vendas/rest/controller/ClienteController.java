@@ -7,8 +7,8 @@ import com.github.julianomachadoo.vendas.rest.form.ClienteForm;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,18 +34,27 @@ public class ClienteController {
 
     @GetMapping
     public List<ClienteDTO> listarClientes() {
-        List<Cliente> clienteList = clienteRepository.findAll();
+        List<Cliente> clienteList = clienteRepository.findAllByAtivoTrue();
         List<ClienteDTO> clienteDtoList = new ArrayList<>();
         clienteList.forEach(cliente -> clienteDtoList.add(new ClienteDTO(cliente)));
         return clienteDtoList;
     }
 
     @PostMapping
+    @Transactional
     public ResponseEntity<ClienteDTO> cadastroDeCliente(
-            @RequestBody @Valid ClienteForm clienteForm, UriComponentsBuilder uriBuilder) {
+            @RequestBody @Valid ClienteForm clienteForm) {
 
         Cliente cliente = clienteRepository.save(new Cliente(clienteForm));
         return ResponseEntity.ok().body(new ClienteDTO(cliente));
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<?> removerCliente(@PathVariable Long id) {
+        Cliente cliente = clienteRepository.getReferenceById(id);
+        cliente.setAtivo(false);
+        return ResponseEntity.noContent().build();
     }
 
 }

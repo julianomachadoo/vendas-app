@@ -10,8 +10,8 @@ INSERT INTO produto (nome, data_cadastro, descricao, preco_unitario, categoria_i
 INSERT INTO produto (nome, data_cadastro, descricao, preco_unitario, categoria_id)
     VALUES ('Akira vol 2', '2022-12-29 16:07:00', 'Mangá', 60.00, 2);
 
-INSERT INTO cliente (nome, cpf) VALUES ('Fulano', '111.111.111-11');
-INSERT INTO cliente (nome, cpf) VALUES ('Cicrano', '123.456.789-10');
+INSERT INTO cliente (nome, cpf, ativo) VALUES ('Fulano', '111.111.111-11', 1);
+INSERT INTO cliente (nome, cpf, ativo) VALUES ('Cicrano', '123.456.789-10', 1);
 
 INSERT INTO pedido (cliente_id, data_pedido, valor_total, status_pedido)
     VALUES (1, '2022-12-29 16:14:00', 3000.00, 'APROVADO');
