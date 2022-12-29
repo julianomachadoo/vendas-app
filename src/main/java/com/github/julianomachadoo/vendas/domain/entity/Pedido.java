@@ -3,7 +3,7 @@ package com.github.julianomachadoo.vendas.domain.entity;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,7 +15,7 @@ public class Pedido {
     private Long id;
     @ManyToOne
     private Cliente cliente;
-    private LocalDate dataPedido = LocalDate.now();
+    private LocalDateTime dataPedido = LocalDateTime.now();
     private BigDecimal valorTotal;
     @Enumerated(EnumType.STRING)
     private StatusPedido statusPedido;
@@ -41,11 +41,11 @@ public class Pedido {
         this.cliente = cliente;
     }
 
-    public LocalDate getDataPedido() {
+    public LocalDateTime getDataPedido() {
         return dataPedido;
     }
 
-    public void setDataPedido(LocalDate dataPedido) {
+    public void setDataPedido(LocalDateTime dataPedido) {
         this.dataPedido = dataPedido;
     }
 

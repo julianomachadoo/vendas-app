@@ -3,7 +3,7 @@ package com.github.julianomachadoo.vendas.domain.entity;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -12,10 +12,11 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String nome;
     private String descricao;
     @Column(name = "preco_unitario")
     private BigDecimal preco;
-    private LocalDate dataCadastro = LocalDate.now();
+    private LocalDateTime dataCadastro = LocalDateTime.now();
     @ManyToOne
     private Categoria categoria;
 
@@ -28,6 +29,14 @@ public class Produto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getDescricao() {
@@ -46,11 +55,11 @@ public class Produto {
         this.preco = preco;
     }
 
-    public LocalDate getDataCadastro() {
+    public LocalDateTime getDataCadastro() {
         return dataCadastro;
     }
 
-    public void setDataCadastro(LocalDate dataCadastro) {
+    public void setDataCadastro(LocalDateTime dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
 
