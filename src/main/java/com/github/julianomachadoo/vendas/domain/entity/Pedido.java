@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -12,11 +13,14 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne
     private Cliente cliente;
     private LocalDate dataPedido;
     private BigDecimal total;
     @Enumerated(EnumType.STRING)
     private StatusPedido statusPedido;
+    @OneToMany(mappedBy = "pedido")
+    private List<ItemPedido> itens;
 
     public Pedido() {
     }
@@ -59,6 +63,14 @@ public class Pedido {
 
     public void setStatusPedido(StatusPedido statusPedido) {
         this.statusPedido = statusPedido;
+    }
+
+    public List<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemPedido> itens) {
+        this.itens = itens;
     }
 
     @Override

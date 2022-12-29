@@ -1,9 +1,6 @@
 package com.github.julianomachadoo.vendas.domain.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 import java.util.Set;
@@ -16,6 +13,7 @@ public class Cliente {
     private Long id;
     private String nome;
     private String cpf;
+    @OneToMany(mappedBy = "cliente")
     private Set<Pedido> pedidos;
 
     public Cliente() {
