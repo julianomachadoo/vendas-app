@@ -3,12 +3,12 @@ package com.github.julianomachadoo.vendas.rest.controller;
 import com.github.julianomachadoo.vendas.domain.entity.Cliente;
 import com.github.julianomachadoo.vendas.domain.repository.ClienteRepository;
 import com.github.julianomachadoo.vendas.rest.dto.ClienteDTO;
+import com.github.julianomachadoo.vendas.rest.form.ClienteForm;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,5 +40,12 @@ public class ClienteController {
         return clienteDtoList;
     }
 
+    @PostMapping
+    public ResponseEntity<ClienteDTO> cadastroDeCliente(
+            @RequestBody @Valid ClienteForm clienteForm, UriComponentsBuilder uriBuilder) {
+
+        Cliente cliente = clienteRepository.save(new Cliente(clienteForm));
+        return ResponseEntity.ok().body(new ClienteDTO(cliente));
+    }
 
 }
