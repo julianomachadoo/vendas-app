@@ -15,7 +15,7 @@ public class Pedido {
     private Long id;
     @ManyToOne
     private Cliente cliente;
-    private LocalDate dataPedido;
+    private LocalDate dataPedido = LocalDate.now();
     private BigDecimal total;
     @Enumerated(EnumType.STRING)
     private StatusPedido statusPedido;
