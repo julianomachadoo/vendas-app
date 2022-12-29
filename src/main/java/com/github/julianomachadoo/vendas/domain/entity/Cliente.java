@@ -1,5 +1,6 @@
 package com.github.julianomachadoo.vendas.domain.entity;
 
+import com.github.julianomachadoo.vendas.rest.form.ClienteForm;
 import jakarta.persistence.*;
 
 import java.util.Objects;
@@ -17,6 +18,11 @@ public class Cliente {
     private Set<Pedido> pedidos;
 
     public Cliente() {
+    }
+
+    public Cliente (ClienteForm clienteForm) {
+        this.nome = clienteForm.getNome();
+        this.cpf = clienteForm.getCpf();
     }
 
     public Long getId() {
