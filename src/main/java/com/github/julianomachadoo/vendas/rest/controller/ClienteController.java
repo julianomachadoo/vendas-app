@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -29,4 +31,14 @@ public class ClienteController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping
+    public List<ClienteDTO> listarClientes() {
+        List<Cliente> clienteList = clienteRepository.findAll();
+        List<ClienteDTO> clienteDtoList = new ArrayList<>();
+        clienteList.forEach(cliente -> clienteDtoList.add(new ClienteDTO(cliente)));
+        return clienteDtoList;
+    }
+
+
 }
