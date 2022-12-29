@@ -16,7 +16,7 @@ public class Pedido {
     @ManyToOne
     private Cliente cliente;
     private LocalDate dataPedido = LocalDate.now();
-    private BigDecimal total;
+    private BigDecimal valorTotal;
     @Enumerated(EnumType.STRING)
     private StatusPedido statusPedido;
     @OneToMany(mappedBy = "pedido")
@@ -49,12 +49,12 @@ public class Pedido {
         this.dataPedido = dataPedido;
     }
 
-    public BigDecimal getTotal() {
-        return total;
+    public BigDecimal getValorTotal() {
+        return valorTotal;
     }
 
-    public void setTotal(BigDecimal total) {
-        this.total = total;
+    public void setValorTotal(BigDecimal valorTotal) {
+        this.valorTotal = valorTotal;
     }
 
     public StatusPedido getStatusPedido() {
