@@ -5,7 +5,8 @@ create table categoria(
 
 create table produto(
     id bigint primary key not null auto_increment,
-    data_cadastro datetime not null,
+    nome varchar(100) not null,
+    data_cadastro smalldatetime	 not null,
     descricao varchar(255),
     preco_unitario decimal(10,2) not null,
     categoria_id bigint not null foreign key references categoria(id)
@@ -20,7 +21,7 @@ create table cliente(
 create table pedido(
     id bigint primary key not null auto_increment,
     cliente_id bigint not null foreign key references cliente(id),
-    data_pedido datetime not null,
+    data_pedido smalldatetime not null,
     valor_total decimal(10,2) not null,
     status_pedido varchar(20) not null
 );
