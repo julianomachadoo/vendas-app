@@ -1,9 +1,6 @@
 package com.github.julianomachadoo.vendas.domain.entity;
 
-import com.github.julianomachadoo.vendas.rest.form.ProdutoForm;
-import com.github.julianomachadoo.vendas.service.ProdutoService;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -25,17 +22,9 @@ public class Produto {
     private LocalDateTime dataCadastro = LocalDateTime.now().truncatedTo(SECONDS);
     @ManyToOne
     private Categoria categoria;
-    private Integer estoque;
+    private Integer estoque = 0;
 
     public Produto() {
-    }
-
-    public Produto(ProdutoForm produtoForm) {
-        this.nome = produtoForm.getNome();
-        this.descricao = produtoForm.getDescricao();
-        this.preco = new BigDecimal(produtoForm.getPreco());
-        this.categoria = ProdutoService.encontrarCategoria(produtoForm.getCategoria());
-        this.estoque = produtoForm.getEstoque();
     }
 
     public Long getId() {
@@ -90,8 +79,8 @@ public class Produto {
         return estoque;
     }
 
-    public void setEstoque(int estoque) {
-        this.estoque = estoque;
+    public void adicionarEstoque(Integer estoque) {
+        this.estoque += estoque;
     }
 
     @Override

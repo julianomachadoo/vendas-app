@@ -1,5 +1,6 @@
 package com.github.julianomachadoo.vendas.rest.controller;
 
+import com.github.julianomachadoo.vendas.exceptions.DadosInvalidosException;
 import com.github.julianomachadoo.vendas.exceptions.DadosNaoEncontradosException;
 import com.github.julianomachadoo.vendas.rest.dto.ApiErrorsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,11 @@ public class ControllerAdvice {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiErrorsDTO handleDataIntegrityViolationException() {
         return new ApiErrorsDTO("Não foi possível realizar operação, algum campo que deve ser único está sendo enviado de forma repetida");
+    }
+
+    @ExceptionHandler(DadosInvalidosException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiErrorsDTO handleDadosInvalidosException(DadosInvalidosException ex) {
+        return new ApiErrorsDTO(ex.getMessage());
     }
 }

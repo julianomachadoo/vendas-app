@@ -4,6 +4,7 @@ import com.github.julianomachadoo.vendas.domain.entity.Categoria;
 import com.github.julianomachadoo.vendas.domain.entity.Produto;
 import com.github.julianomachadoo.vendas.domain.repository.CategoriaRepository;
 import com.github.julianomachadoo.vendas.domain.repository.ProdutoRepository;
+import com.github.julianomachadoo.vendas.exceptions.DadosInvalidosException;
 import com.github.julianomachadoo.vendas.exceptions.DadosNaoEncontradosException;
 import com.github.julianomachadoo.vendas.rest.dto.ProdutoDTO;
 import com.github.julianomachadoo.vendas.rest.dto.ProdutoListagemDTO;
@@ -11,6 +12,7 @@ import com.github.julianomachadoo.vendas.rest.form.ProdutoForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,14 +40,28 @@ public class ProdutoService {
         return produtos.stream().map(ProdutoListagemDTO::new).collect(Collectors.toList());
     }
 
+    public ProdutoDTO cadastrarProduto(ProdutoForm produtoForm) {
+        Produto produto = produtoRepository.save(registrarFormulario(produtoForm));
+        return new ProdutoDTO(produto);
+    }
+
     public static Categoria encontrarCategoria(String categoriaNome) {
         Optional<Categoria> categoria = categoriaRepository.findByNome(categoriaNome.toUpperCase());
         if (categoria.isEmpty()) throw new DadosNaoEncontradosException("Categoria não cadastrada");
         return categoria.get();
     }
 
-    public ProdutoDTO cadastrarProduto(ProdutoForm produtoForm) {
-        Produto produto = produtoRepository.save(new Produto(produtoForm));
-        return new ProdutoDTO(produto);
+    public Produto registrarFormulario(ProdutoForm produtoForm) {
+        Produto produto = new Produto();
+        produto.setNome(produtoForm.getNome());
+        produto.setDescricao(produtoForm.getDescricao());
+        produto.setCategoria(ProdutoService.encontrarCategoria(produtoForm.getCategoria()));
+        produto.adicionarEstoque(produtoForm.getEstoque());
+        try{
+            produto.setPreco(new BigDecimal(produtoForm.getPreco()));
+        } catch (NumberFormatException e) {
+            throw new DadosInvalidosException("Preço inválido");
+        }
+        return produto;
     }
 }
