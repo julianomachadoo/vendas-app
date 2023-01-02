@@ -1,10 +1,14 @@
 package com.github.julianomachadoo.vendas.domain.entity;
 
+import com.github.julianomachadoo.vendas.rest.form.ProdutoForm;
+import com.github.julianomachadoo.vendas.service.ProdutoService;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
+
+import static java.time.temporal.ChronoUnit.SECONDS;
 
 @Entity
 public class Produto {
@@ -12,15 +16,23 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String nome;
     private String descricao;
     @Column(name = "preco_unitario")
     private BigDecimal preco;
-    private LocalDateTime dataCadastro = LocalDateTime.now();
+    private LocalDateTime dataCadastro = LocalDateTime.now().truncatedTo(SECONDS);
     @ManyToOne
     private Categoria categoria;
 
     public Produto() {
+    }
+
+    public Produto(ProdutoForm produtoForm) {
+        this.nome = produtoForm.getNome();
+        this.descricao = produtoForm.getDescricao();
+        this.preco = new BigDecimal(produtoForm.getPreco());
+        this.categoria = ProdutoService.encontrarCategoria(produtoForm.getCategoria());
     }
 
     public Long getId() {

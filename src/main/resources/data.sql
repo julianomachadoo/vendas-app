@@ -1,5 +1,5 @@
-INSERT INTO categoria (nome) VALUES('Computadores');
-INSERT INTO categoria (nome) VALUES('Livros');
+INSERT INTO categoria (nome) VALUES('COMPUTADORES');
+INSERT INTO categoria (nome) VALUES('LIVROS');
 
 INSERT INTO produto (nome, data_cadastro, descricao, preco_unitario, categoria_id)
     VALUES ('Ideapad S145', '2022-12-29 16:07:00', 'Notebook de uso pessoal da lenovo', 3000.00, 1);
