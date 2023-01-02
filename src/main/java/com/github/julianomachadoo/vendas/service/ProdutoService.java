@@ -8,6 +8,7 @@ import com.github.julianomachadoo.vendas.exceptions.DadosInvalidosException;
 import com.github.julianomachadoo.vendas.exceptions.DadosNaoEncontradosException;
 import com.github.julianomachadoo.vendas.rest.dto.ProdutoDTO;
 import com.github.julianomachadoo.vendas.rest.dto.ProdutoListagemDTO;
+import com.github.julianomachadoo.vendas.rest.form.ProdutoAtualizacaoForm;
 import com.github.julianomachadoo.vendas.rest.form.ProdutoForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,17 @@ public class ProdutoService {
     public ProdutoDTO cadastrarProduto(ProdutoForm produtoForm) {
         Produto produto = produtoRepository.save(registrarFormulario(produtoForm));
         return new ProdutoDTO(produto);
+    }
+
+    public ProdutoDTO atualizaProduto(ProdutoAtualizacaoForm produtoAtualizacaoForm, Long id) {
+        Optional<Produto> produto = produtoRepository.findById(id);
+        if (produto.isEmpty()) throw new DadosNaoEncontradosException("Produto não encontrado");
+        if (produtoAtualizacaoForm.getDescricao() != null)
+            produto.get().setDescricao(produtoAtualizacaoForm.getDescricao());
+        if (produtoAtualizacaoForm.getAdicionarEstoque() != null) {
+            produto.get().adicionarEstoque(produtoAtualizacaoForm.getAdicionarEstoque());
+        }
+        return new ProdutoDTO(produto.get());
     }
 
     public static Categoria encontrarCategoria(String categoriaNome) {
