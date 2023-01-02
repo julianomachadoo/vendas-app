@@ -1,5 +1,6 @@
 package com.github.julianomachadoo.vendas.rest.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.julianomachadoo.vendas.domain.entity.Produto;
 
 import java.math.BigDecimal;
@@ -7,10 +8,11 @@ import java.time.LocalDateTime;
 
 public class ProdutoDTO {
 
+    @JsonIgnore
     private Long id;
     private String nome;
     private String descricao;
-    private BigDecimal preco;
+    private String preco;
     private LocalDateTime dataCadastro;
     private String categoria;
 
@@ -18,7 +20,7 @@ public class ProdutoDTO {
         this.id = produto.getId();
         this.nome = produto.getNome();
         this.descricao = produto.getDescricao();
-        this.preco = produto.getPreco();
+        this.preco = "R$ " + produto.getPreco();
         this.dataCadastro = produto.getDataCadastro();
         this.categoria = produto.getCategoria().toString();
     }
@@ -47,12 +49,12 @@ public class ProdutoDTO {
         this.descricao = descricao;
     }
 
-    public BigDecimal getPreco() {
+    public String getPreco() {
         return preco;
     }
 
     public void setPreco(BigDecimal preco) {
-        this.preco = preco;
+        this.preco = "R$ " + preco;
     }
 
     public LocalDateTime getDataCadastro() {
