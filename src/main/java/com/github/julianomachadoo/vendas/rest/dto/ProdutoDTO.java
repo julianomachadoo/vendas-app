@@ -15,6 +15,7 @@ public class ProdutoDTO {
     private String preco;
     private LocalDateTime dataCadastro;
     private String categoria;
+    private Integer estoque;
 
     public ProdutoDTO(Produto produto) {
         this.id = produto.getId();
@@ -23,6 +24,7 @@ public class ProdutoDTO {
         this.preco = "R$ " + produto.getPreco();
         this.dataCadastro = produto.getDataCadastro();
         this.categoria = produto.getCategoria().toString();
+        this.estoque = produto.getEstoque();
     }
 
     public Long getId() {
@@ -71,5 +73,13 @@ public class ProdutoDTO {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public Integer getEstoque() {
+        return estoque;
+    }
+
+    public void setEstoque(Integer estoque) {
+        this.estoque = estoque;
     }
 }

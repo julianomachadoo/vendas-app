@@ -1,14 +1,14 @@
 INSERT INTO categoria (nome) VALUES('COMPUTADORES');
 INSERT INTO categoria (nome) VALUES('LIVROS');
 
-INSERT INTO produto (nome, data_cadastro, descricao, preco_unitario, categoria_id)
-    VALUES ('Ideapad S145', '2022-12-29 16:07:00', 'Notebook de uso pessoal da lenovo', 3000.00, 1);
-INSERT INTO produto (nome, data_cadastro, descricao, preco_unitario, categoria_id)
-    VALUES ('Acer Nitro 5', '2022-12-29 16:07:00', 'Notebook gamer da Acer', 5000.00, 1);
-INSERT INTO produto (nome, data_cadastro, descricao, preco_unitario, categoria_id)
-    VALUES ('Akira vol 1', '2022-12-29 16:07:00', 'Mangá', 60.00, 2);
-INSERT INTO produto (nome, data_cadastro, descricao, preco_unitario, categoria_id)
-    VALUES ('Akira vol 2', '2022-12-29 16:07:00', 'Mangá', 60.00, 2);
+INSERT INTO produto (nome, data_cadastro, descricao, preco_unitario, categoria_id, estoque)
+    VALUES ('Ideapad S145', '2022-12-29 16:07:00', 'Notebook de uso pessoal da lenovo', 3000.00, 1, 10);
+INSERT INTO produto (nome, data_cadastro, descricao, preco_unitario, categoria_id, estoque)
+    VALUES ('Acer Nitro 5', '2022-12-29 16:07:00', 'Notebook gamer da Acer', 5000.00, 1, 10);
+INSERT INTO produto (nome, data_cadastro, descricao, preco_unitario, categoria_id, estoque)
+    VALUES ('Akira vol 1', '2022-12-29 16:07:00', 'Mangá', 60.00, 2, 10);
+INSERT INTO produto (nome, data_cadastro, descricao, preco_unitario, categoria_id, estoque)
+    VALUES ('Akira vol 2', '2022-12-29 16:07:00', 'Mangá', 60.00, 2, 15);
 
 INSERT INTO cliente (nome, cpf, ativo) VALUES ('Fulano', '111.111.111-11', 1);
 INSERT INTO cliente (nome, cpf, ativo) VALUES ('Cicrano', '123.456.789-10', 1);
