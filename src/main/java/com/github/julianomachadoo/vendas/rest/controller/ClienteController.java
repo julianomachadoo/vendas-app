@@ -21,9 +21,8 @@ public class ClienteController {
     ClienteService clienteService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClienteDTO> getClientById(@PathVariable Long id) {
-        ClienteDTO clienteDTO = clienteService.getClientById(id);
-        return ResponseEntity.ok().body(clienteDTO);
+    public ClienteDTO getClientById(@PathVariable Long id) {
+        return clienteService.getClientById(id);
     }
 
     @GetMapping
